@@ -8,5 +8,6 @@ databricks auth token --host <workspace-url> -p <profile-name>
 databricks bundle init
 cd my_dbab
 databricks bundle validate
-databricks bundle deploy -t dev
+databricks bundle deploy
+databricks bundle destroy
 ```

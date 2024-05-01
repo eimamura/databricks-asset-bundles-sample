@@ -1,0 +1,34 @@
+resources:
+  jobs:
+    myjob:
+      name: myjob
+      tasks:
+        - task_key: mytask
+          notebook_task:
+            notebook_path: /Users/imamuraeriel@gmail.com/mytask
+            source: WORKSPACE
+          job_cluster_key: my_Job_cluster
+      job_clusters:
+        - job_cluster_key: my_Job_cluster
+          new_cluster:
+            spark_version: 14.3.x-scala2.12
+            spark_conf:
+              spark.master: local[*, 4]
+              spark.databricks.cluster.profile: singleNode
+            aws_attributes:
+              first_on_demand: 1
+              availability: SPOT_WITH_FALLBACK
+              zone_id: us-east-1a
+              spot_bid_price_percent: 100
+              ebs_volume_count: 0
+            node_type_id: i3.xlarge
+            custom_tags:
+              ResourceClass: SingleNode
+            spark_env_vars:
+              ENV: dev
+            enable_elastic_disk: false
+            data_security_mode: SINGLE_USER
+            runtime_engine: STANDARD
+            num_workers: 0
+      queue:
+        enabled: true
